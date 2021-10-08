@@ -3,10 +3,131 @@ body {
 }
 
 
-/* Style for nav */
+/* Style for logo */
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 5px;
+}
 
 
-/* Style for nav */
+/* Style for form background */
+
+#form-body {
+    background-color: #FBC093;
+}
+
+
+/* Style for form input */
+
+input[type=text] {
+    border: 1px solid #081500;
+    padding: 3px 10px;
+    color: #081500;
+    border-radius: 4px;
+    width: 100%;
+}
+
+input[type=password] {
+    border: 1px solid #081500;
+    padding: 3px 10px;
+    color: #081500;
+    border-radius: 4px;
+    width: 100%;
+}
+
+
+/* Style for Register and Login Pages */
+
+#regtitle {
+    color: #081500;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+#register-submit-btn {
+    border-radius: 4px;
+    color: white;
+    padding: 7px 23px;
+    cursor: pointer;
+    background-color: #081500;
+    border: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+#login-submit-btn {
+    border-radius: 4px;
+    color: white;
+    padding: 7px 85px;
+    cursor: pointer;
+    background-color: #081500;
+    border: none;
+    font-weight: bold;
+}
+
+#login-submit-btn:hover {
+    background-color: #FBC093;
+    color: #081500;
+}
+
+#forget-password {
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+#go-to-register {
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+#logintitle {
+    color: #081500;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+#form-base {
+    border-radius: 6px;
+    margin-top: 25px;
+    padding: 20px 5px;
+    box-shadow: 2px 3px 2px 3px grey;
+    background-color: white;
+}
+
+
+/* Style for Header Nav */
+
+#search-bar {
+    margin-top: 80px;
+    width: 70%;
+    display: flex;
+}
+
+#main-nav {
+    margin-top: 40px;
+    color: white;
+    background-color: purple;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    background-color: purple;
+}
+
+li {
+    font-size: 20px;
+    padding: 10px 50px;
+    background-color: purple;
+}
 
 
 /* Style for footer */
@@ -62,6 +183,3 @@ body {
 .footer_row {
     padding-top: 10px;
 }
-
-
-/* Style for footer */

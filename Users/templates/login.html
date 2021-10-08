@@ -1,8 +1,31 @@
-{% extends 'base.html' %} {% block content %}
-<form method="POST">
-    {% csrf_token %} {{msg}}
-    <!-- {{form|linebreaks}} -->
-    {% for line in userForm %} {{line.label}} : {{line}}<br><br> {% endfor %}
-    <input type="submit" value="Login">
+{% extends 'register_login_base.html' %} {% block title %}
+<title>Login</title>
+{% endblock %} {% block content %}
+
+<p id="logintitle">Login Form </p>
+
+<form action='.' method='POST'>{% csrf_token %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% for field in userForm %}
+            <div style="font-weight:bold;">
+                {{field}}
+            </div><br> {% endfor %}
+            <input id="login-submit-btn" type='submit' value='Login'>
+            <br>
+
+            <center><a href="#" id="forget-password">Forget Password</a><br></center>
+
+            <center><a href="#" id="go-to-register">Does Not have an acoount? Go to create one!!!</a><br></center>
+
+        </div>
+        <div class="col-md-3"></div>
+
+
+    </div>
+
 </form>
+
+
 {% endblock %}

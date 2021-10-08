@@ -3,7 +3,9 @@
 <html>
 
 <head>
-    {% block titleCSSjs %} {% endblock %}
+    {% block title %} {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Essential Script and Link -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -26,9 +28,7 @@
 
 <body>
     <div class="container-fluid">
-        {% include 'nav.html' %}
-        <h2>Welcome From Reck_Guba_Project</h2>
-        {% block content %} {% endblock %} {% include 'footer.html' %}
+        {% include 'nav.html' %} {% block content %} {% endblock %} {% include 'footer.html' %}
         <script type="text/javascript" src="{% static 'js/index.js'%}"></script>
     </div>
 </body>

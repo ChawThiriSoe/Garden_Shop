@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<form method="POST">
+    {% csrf_token %} {{msg}}
+    <!-- {{form|linebreaks}} -->
+    {% for line in userForm %} {{line.label}} : {{line}}<br><br> {% endfor %}
+    <input type="submit" value="Login">
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 body {
     background-color: #F0F0F0;
+    font-family: "Verdana", Arial, Sans-serif;
 }
 
 
@@ -52,22 +53,31 @@ input[type=password] {
 #register-submit-btn {
     border-radius: 4px;
     color: white;
-    padding: 7px 23px;
+    padding: 8px 23px;
     cursor: pointer;
     background-color: #081500;
     border: none;
     margin-left: 15px;
     font-weight: bold;
+    width: 40%;
+    margin-left: 14px;
+}
+
+#register-submit-btn:hover {
+    background-color: #FBC093;
+    color: #081500;
 }
 
 #login-submit-btn {
     border-radius: 4px;
     color: white;
-    padding: 7px 85px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     cursor: pointer;
     background-color: #081500;
     border: none;
     font-weight: bold;
+    width: 90%;
 }
 
 #login-submit-btn:hover {
@@ -77,14 +87,32 @@ input[type=password] {
 
 #forget-password {
     text-decoration: none;
-    text-align: center;
-    font-size: 16px;
+    font-size: 12.5px;
+    color: #C92F43;
+}
+
+#forget-password:hover {
+    color: #081500;
 }
 
 #go-to-register {
     text-decoration: none;
-    text-align: center;
-    font-size: 16px;
+    font-size: 12.5px;
+    color: #C92F43;
+}
+
+#go-to-register:hover {
+    color: #081500;
+}
+
+#go-to-login {
+    text-decoration: none;
+    font-size: 12px;
+    color: #C92F43;
+}
+
+#go-to-login:hover {
+    color: #081500;
 }
 
 #logintitle {
@@ -96,8 +124,9 @@ input[type=password] {
 
 #form-base {
     border-radius: 6px;
-    margin-top: 25px;
-    padding: 20px 5px;
+    margin: 30px 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     box-shadow: 2px 3px 2px 3px grey;
     background-color: white;
 }

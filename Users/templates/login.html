@@ -12,19 +12,20 @@
             <div style="font-weight:bold;">
                 {{field}}
             </div><br> {% endfor %}
-            <input id="login-submit-btn" type='submit' value='Login'>
+            <center><input id="login-submit-btn" type='submit' value='Login'></center>
             <br>
-
-            <center><a href="#" id="forget-password">Forget Password</a><br></center>
-
-            <center><a href="#" id="go-to-register">Does Not have an acoount? Go to create one!!!</a><br></center>
-
         </div>
         <div class="col-md-3"></div>
-
-
     </div>
-
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <a href="#" id="forget-password">Forget Password?</a>
+        </div>
+        <div class="col-md-6">
+            <a href="/user/register" id="go-to-register">Doesn't have an acoount?</a>
+        </div>
+    </div>
 </form>
 
 

@@ -1,6 +1,6 @@
 from django import forms
 from .models import User
-
+import re
 class UserRegisterForm(forms.ModelForm):
     name = forms.CharField(label = 'Name',required = True, widget=forms.TextInput(attrs={'placeholder': 'Enter your Name'}))
     email = forms.EmailField(label = 'Email',required = True, widget=forms.TextInput(attrs={'placeholder': 'Enter your Email'}))

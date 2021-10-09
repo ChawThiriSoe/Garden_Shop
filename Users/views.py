@@ -18,7 +18,7 @@ def User_Register_View(request):
             while True:
                 if (len(userpwd)<8):
                     condition_pwd = -1
-                    err_msg = "Password's length must contain at least 8 characters."
+                    err_msg = "Password lenght must contain at least 8 characters."
                     break
                 elif not re.search('[a-z]', userpwd):
                     condition_pwd = -1
@@ -57,8 +57,6 @@ def User_Register_View(request):
             'userForm':userForm
         }
             return render(request,"register.html",context)
-
-        return redirect('../login/')
     else:
         userForm = UserRegisterForm()
         context = {
@@ -74,7 +72,9 @@ def User_Login_View(request):
             password = userForm.cleaned_data['password']
             
             if User.objects.filter(name=username, password=password).exists():
-                return render(request, "index.html")
+                user_data=User.objects.get(name=username,password=password)
+                request.session['username'] = user_data.name
+                return redirect('users:index')
             else:
                 userForm = UserLoginForm()
                 context = {

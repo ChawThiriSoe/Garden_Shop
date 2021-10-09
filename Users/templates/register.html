@@ -4,23 +4,28 @@
 
 <p id="regtitle">Create Account </p>
 
-<form action='.' method='POST'>{% csrf_token %}
+<form action='.' method='POST'>
+    {% csrf_token %} {% if userForm.email.errors or userForm.name.errors or error %}
+    <script>
+        alert("{{userForm.name.errors.as_text}}\n{{userForm.email.errors.as_text}}\n{{error}}")
+    </script>
+    {% endif %}
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             {% for field in userForm %}
             <div style="font-weight:bold;">
                 {{field.label}}<br>{{field}}
-            </div><br> {% endfor %} {{error}}
+            </div><br> {% endfor %}
+            <a href="/user/login" id="go-to-login">
+                <p>Already have an account!!!</p>
+            </a>
             <input id="register-submit-btn" type='submit' value='Create'>
             <input id="register-submit-btn" type='reset' value='Reset'>
         </div>
-        <div class="col-md-3"></div>
-
-
+        <div class="col-md-2"></div>
     </div>
 
 </form>
-
 
 {% endblock %}

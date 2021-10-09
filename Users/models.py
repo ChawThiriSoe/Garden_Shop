@@ -6,4 +6,4 @@ class User(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField(max_length=100)
     password = models.CharField(max_length=15)
-    image = models.FileField(upload_to='../images/', null=True)
+    image= models.ImageField(upload_to='static/images/', null=True, default="static/images/default-image.png")

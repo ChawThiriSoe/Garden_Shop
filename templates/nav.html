@@ -3,9 +3,8 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-3">
-        <img id="logo" src="{% static 'images/logo.png' %}">
+        <a href="/user/index"><img id="logo" src="{% static 'images/logo.png' %}"></a>
     </div>
-
     <div class="col-md-1"></div>
     <div class="col-md-4">
         <center>
@@ -15,23 +14,36 @@
             </form>
         </center>
     </div>
-
 </div>
 
-<div class="row">
-
-    <div class="col-md-12">
-        <div id="main-nav">
+<div class="row" >
+       <nav id="main-nav" >
             <ul>
-                <li>Home</li>
-                <li>Categories</li>
-                <li>SomethingElse</li>
-                <li>Events</li>
-                <li>Wish List</li>
-                <li>User Image</li>
+                <li><a href ="/user/index">Home</a></li>
+                <li class="categories">
+                    Categories
+                    <div class="itemlist">
+                        <a class="items" href="#">Fruits</a>
+                        <a class="items" href="#">Vegetables</a>
+                    </div>
+                </li>
+                <li><a href ="/user/index">Something</a></li>
+                <li><a href ="/user/index">Events</a></li>
+                <li><a href ="/user/index">Wish List</a></li>
+                {% if request.session.logged == True %}
+                <li><a href = "#"><i class="fa fa-shopping-cart" style="font-size:36px"></i></a></li>
+                    <li class="profile">
+                        <img id="nav-profile-image" src='{{ MEDIA_URL | slice:":1" }}{{request.session.image}}'>
+                        <div class="itemlist">
+                            <a class="items" href="#">Profile</a>
+                            <a class="items" href ="/user/logout">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href ="/user/register">Signup</a></li>
+                    <li><a href ="/user/login">Login</a></li>
+
+                {% endif %}
             </ul>
-
-        </div>
-    </div>
-
+        </nav>
 </div>

@@ -4,6 +4,12 @@
 
 <p id="logintitle">Login Form </p>
 
+{% if error %}
+<script>
+    alert("{{error}}")
+</script>
+{% endif %}
+
 <form action='.' method='POST'>{% csrf_token %}
     <div class="row">
         <div class="col-md-3"></div>
@@ -23,10 +29,8 @@
             <a href="#" id="forget-password">Forget Password?</a>
         </div>
         <div class="col-md-6">
-            <a href="/user/register" id="go-to-register">Doesn't have an acoount?</a>
+            <a href="/user/register" id="go-to-register">Doesn't have an account?</a>
         </div>
     </div>
 </form>
-
-
 {% endblock %}

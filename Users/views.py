@@ -6,6 +6,7 @@ import re
 # Create your views here.
 
 def Index_View(request):
+    
     return render(request,"index.html")
 
 def User_Register_View(request):
@@ -73,15 +74,30 @@ def User_Login_View(request):
             
             if User.objects.filter(name=username, password=password).exists():
                 user_data=User.objects.get(name=username,password=password)
+                print(user_data.image)
                 request.session['username'] = user_data.name
+                request.session['logged'] =True
+                request.session['image'] = str(user_data.image)
+                
                 return redirect('users:index')
             else:
                 userForm = UserLoginForm()
+                
+                error = "Invalid Input. Please try again"
                 context = {
-                    'userForm': userForm
+                    'userForm': userForm,
+                    'error':error
                 }
                 return render(request, "login.html", context)
     else:
         userForm = UserLoginForm()
         context = {'userForm': userForm}
         return render(request, 'login.html', context)
+
+def User_Logout(request):
+    print(request.session['image'])
+    del request.session['username']
+    request.session['logged'] = False
+    del request.session['image']
+    
+    return redirect('users:index')

@@ -1,13 +1,19 @@
 from django.shortcuts import redirect, render
 from .models import User
-from .forms import UserRegisterForm,UserLoginForm
-import re
+from .forms import UserRegisterForm,UserLoginForm,UserEditForm
+import re,hashlib
 
 # Create your views here.
 
 def Index_View(request):
     
     return render(request,"index.html")
+
+def pwd_encode(pwd):
+    # to imporve security by using md5 algorithm.
+    md5_pwd =hashlib.md5(pwd.encode()).hexdigest()
+    secure_pwd = hashlib.sha256(md5_pwd.encode()).hexdigest()
+    return secure_pwd
 
 def User_Register_View(request):
     if request.method == 'POST':
@@ -43,6 +49,12 @@ def User_Register_View(request):
                     break
                 else: 
                     condition_pwd = 0
+                    name = userForm.cleaned_data['name']
+                    email = userForm.cleaned_data['email']
+                    password = pwd_encode(userpwd)
+                    user_info = User(name=name, email=email, password=password)
+                    user_info.save()
+                    return redirect('users:user-login')
                     break
             if condition_pwd == -1:
                 context = {
@@ -50,9 +62,6 @@ def User_Register_View(request):
                     'error':err_msg
                 }
                 return render(request,"register.html",context)
-            else:
-                userForm.save()
-                return redirect('users:user-login')
         else:
             context = {
             'userForm':userForm
@@ -69,26 +78,34 @@ def User_Login_View(request):
     if request.method == 'POST':
         userForm = UserLoginForm(request.POST)
         if userForm.is_valid():
-            username = userForm.cleaned_data['name']
-            password = userForm.cleaned_data['password']
+            email = userForm.cleaned_data['email']
+            password = pwd_encode(userForm.cleaned_data['password'])
             
-            if User.objects.filter(name=username, password=password).exists():
-                user_data=User.objects.get(name=username,password=password)
-                print(user_data.image)
+            if User.objects.filter(email=email, password=password).exists():
+                user_data=User.objects.get(email=email,password=password)
                 request.session['username'] = user_data.name
                 request.session['logged'] =True
                 request.session['image'] = str(user_data.image)
-                
+                request.session['id'] = user_data.id
+                request.session['email'] = user_data.email
+                request.session['password'] = user_data.password
                 return redirect('users:index')
             else:
                 userForm = UserLoginForm()
-                
                 error = "Invalid Input. Please try again"
                 context = {
                     'userForm': userForm,
                     'error':error
                 }
                 return render(request, "login.html", context)
+        else:
+            userForm = UserLoginForm()
+            error = "Invalid Input. Please try again"
+            context = {
+                'userForm': userForm,
+                'error':error
+            }
+            return render(request, "login.html", context)
     else:
         userForm = UserLoginForm()
         context = {'userForm': userForm}
@@ -99,5 +116,36 @@ def User_Logout(request):
     del request.session['username']
     request.session['logged'] = False
     del request.session['image']
+    del request.session['id']
+    del request.session['email']
+    del request.session['password']
     
     return redirect('users:index')
+
+def User_Profile(request,id):
+    if request.method == 'POST':
+        userdata = User.objects.get(id=id)
+        userForm = UserEditForm(request.POST,instance = userdata)
+        if userForm.is_valid():
+            userForm.save()
+            name = userForm.cleaned_data["name"]
+            email = userForm.cleaned_data["email"]
+            request.session['username'] = name
+            request.session['email'] = email
+            
+            userForm = UserEditForm(initial={'name': userdata.name, 'email':userdata.email } ) 
+            context ={
+
+                'form':userForm
+            }
+    
+            return render(request,'user_profile.html',context)
+    else:
+        userdata = User.objects.get(id=id)
+        userForm = UserEditForm(initial={'name': userdata.name, 'email':userdata.email } ) 
+        context ={
+
+            'form':userForm
+        }
+    
+        return render(request,'user_profile.html',context)

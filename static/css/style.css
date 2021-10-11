@@ -14,6 +14,12 @@ body {
     border-radius: 5px;
 }
 
+/* Style for profile page */
+#profile-page-image{
+    width:30%;
+    border-radius:50%;
+}
+
 
 /* Style for form background */
 

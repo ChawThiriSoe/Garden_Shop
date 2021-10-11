@@ -35,7 +35,7 @@
                     <li class="profile">
                         <img id="nav-profile-image" src='{{ MEDIA_URL | slice:":1" }}{{request.session.image}}'>
                         <div class="itemlist">
-                            <a class="items" href="#">Profile</a>
+                            <a class="items" href="/user/{{request.session.id}}/profile">Profile</a>
                             <a class="items" href ="/user/logout">Logout</a>
                         </div>
                     </li>

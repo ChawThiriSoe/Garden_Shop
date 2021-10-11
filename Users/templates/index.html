@@ -1,3 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<h1 id="index">Index</h1>
+{% if request.session.username %}
+<h1 id="index">Welcome, {{request.session.username}}</h1>
+{% else %}
+<h1 id="index">Welcome, Guest</h1>
+{% endif %}
 {{welcome}} {% endblock %}

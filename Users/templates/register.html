@@ -7,7 +7,7 @@
 <form action='.' method='POST'>
     {% csrf_token %} {% if userForm.email.errors or userForm.name.errors or error %}
     <script>
-        alert("{{userForm.name.errors.as_text}}\n{{userForm.email.errors.as_text}}\n{{error}}")
+        alert("{{userForm.name.errors.as_text | slice:'2:' }}\n{{userForm.email.errors.as_text | slice:'2:' }}\n{{error}}")
     </script>
     {% endif %}
     <div class="row">

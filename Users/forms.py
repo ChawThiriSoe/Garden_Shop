@@ -36,3 +36,22 @@ class UserEditForm(forms.ModelForm):
             'name',
             'email'
         ]
+
+class UserFgPwdEmailAcceptForm(forms.ModelForm):
+    email = forms.EmailField(label = 'Email',required = True, widget=forms.TextInput(attrs={'placeholder': 'Enter Your Email'}))
+
+    class Meta:
+        model = User
+        fields = [
+            'email'
+        ]
+
+class UserResetPwdForm(forms.ModelForm):
+    password = forms.CharField(label = 'Password',required = True, widget = forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    
+    class Meta:
+        model = User
+        fields = [
+            'password'
+        ]
+

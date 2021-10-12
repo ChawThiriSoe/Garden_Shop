@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User,Product,Order
 import re
 
 class UserRegisterForm(forms.ModelForm):
@@ -54,4 +54,3 @@ class UserResetPwdForm(forms.ModelForm):
         fields = [
             'password'
         ]
-

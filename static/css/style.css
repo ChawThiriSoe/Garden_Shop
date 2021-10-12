@@ -1,6 +1,5 @@
 body {
     background-color: #F0F0F0;
-    font-family: "Verdana", Arial, Sans-serif;
 }
 
 
@@ -12,12 +11,6 @@ body {
     margin-right: auto;
     width: 50%;
     border-radius: 5px;
-}
-
-/* Style for profile page */
-#profile-page-image{
-    width:30%;
-    border-radius:50%;
 }
 
 
@@ -58,36 +51,48 @@ input[type=password] {
 
 #register-submit-btn {
     border-radius: 4px;
-    color: white;
+    color: #F0F0F0;
     padding: 8px 23px;
+    margin-left:14px;
+    width:40%;
     cursor: pointer;
     background-color: #081500;
     border: none;
-    margin-left: 15px;
     font-weight: bold;
-    width: 40%;
-    margin-left: 14px;
 }
 
-#register-submit-btn:hover {
+#register-submit-btn:hover{
     background-color: #FBC093;
     color: #081500;
+    cursor:pointer;
 }
 
 #login-submit-btn {
     border-radius: 4px;
-    color: white;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    color: #F0F0F0;
+    padding-top:7px;
+    padding-bottom:7px;
+    width:90%;
     cursor: pointer;
     background-color: #081500;
     border: none;
     font-weight: bold;
-    width: 90%;
+
 }
 
 #login-submit-btn:hover {
     background-color: #FBC093;
+    color: #081500;
+}
+
+
+#go-to-login {
+    text-decoration: none;
+    font-size: 12.5px;
+    color: #C92F43;
+}
+
+#go-to-login:hover {
     color: #081500;
 }
 
@@ -111,16 +116,6 @@ input[type=password] {
     color: #081500;
 }
 
-#go-to-login {
-    text-decoration: none;
-    font-size: 12px;
-    color: #C92F43;
-}
-
-#go-to-login:hover {
-    color: #081500;
-}
-
 #logintitle {
     color: #081500;
     font-weight: bold;
@@ -132,9 +127,9 @@ input[type=password] {
     border-radius: 6px;
     margin: 30px 20px;
     padding-top: 20px;
-    padding-bottom: 20px;
-    box-shadow: 2px 3px 2px 3px grey;
-    background-color: white;
+    padding-bottom:20px;
+    box-shadow: 2px 3px 2px 3px #717D7E;
+    background-color: #F0F0F0;
 }
 
 
@@ -147,8 +142,9 @@ input[type=password] {
 }
 
 
-#main-nav {
 
+#main-nav {
+    
     margin-top: 40px;
     color: #F0F0F0;
     background-color: #7CC926;
@@ -156,24 +152,25 @@ input[type=password] {
 
 ul {
     list-style-type: none;
+  
     background-color: #7CC926;
 }
 
 li {
-    font-size: 20px;
+    font-size: 24px;
     padding: 10px 48.5px;
+    
     float:left;
+
     font-weight:bold;
     color:#F0F0F0;
     background-color: #7CC926;
 }
-
 li a{
-
+    
     font-weight:bold;
     color:#F0F0F0;
 }
-
 li:hover{
     color: #081500;
     text-decoration:none;
@@ -181,7 +178,7 @@ li:hover{
 }
 
 li a:hover{
-
+    
     color: #081500;
     text-decoration:none;
     cursor:pointer;
@@ -190,44 +187,47 @@ li a:hover{
 .categories {
     position: relative;
     display: inline-block;
-}
-
+  }
+  
 .itemlist{
     display: none;
     position: absolute;
+    
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     background-color: #7CC926;
     padding: 12px 16px;
     z-index: 1;
-}
-
+  }
+  
 .categories:hover .itemlist {
     margin-top:5px;
     display: block;
     border:1px solid rgba(0,0,0,0.2);
     color:#F0f0F0;
     border-radius:5px;
+    
     background-color: #7CC926;
-}
+  }
 
-.categories:hover .items {
+  .categories:hover .items {
     font-weight:bold;
     color:#F0F0F0;
     padding:5px 10px;
     text-decoration:None;
     font-size:20px;
-}
+  }
 
-.categories:hover .items:hover{
+  .categories:hover .items:hover{
     color: #081500;
-}
-
+  }
 .profile{
     padding-left:90px;
     padding-right:65px;
 }
 
+
+  
 .profile:hover .itemlist {
     margin-top:5px;
     display: block;
@@ -235,30 +235,33 @@ li a:hover{
     color:#F0f0F0;
     border-radius:5px;
     background-color: #7CC926;
-}
+  }
 
-.profile:hover .items {
+
+  .profile:hover .items {
     font-weight:bold;
     color:#F0F0F0;
     padding:5px 10px;
     text-decoration:None;
     font-size:20px;
-}
+  }
 
-.profile:hover .items:hover{
+  .profile:hover .items:hover{
     color: #081500;
-}
+  }
 
 #nav-profile-image{
+    
+    
     width:45px;
-    height:45px;
+    height:40px;
     border-radius:50%;
 }
-
 
 /* Style for footer */
 
 .footer {
+    
     margin-top: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -303,9 +306,51 @@ li a:hover{
 
 .footer_maintain {
     padding: 10px;
-    background-color: darkgray;
+    background-color: #A9A9A9;
 }
 
 .footer_row {
     padding-top: 10px;
+}
+
+/* Style for profile page */
+#profile-page-image{
+    width:30%;
+    border-radius:50%;
+}
+
+#user-profile-btn {
+    border-radius: 4px;
+    color: #F0F0F0;
+    text-decoration:none;
+    cursor: pointer;
+    background-color: #081500;
+    padding: 10px 10px;
+    margin-top:10px;
+    font-weight: bold;
+}
+
+#user-profile-btn:hover{
+    background-color: #FBC093;
+    color: #081500;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.password-btn{
+    border-radius: 4px;
+    color: #F0F0F0;
+    text-decoration:none;
+    cursor: pointer;
+    box-shadow:1px 2px 1px 2px rgba(0,0,0,1);
+    background-color: #081500;
+    padding: 14px 10px;
+    font-weight: bold;
+}
+
+.password-btn:hover{
+    background-color: #FBC093;
+    color: #081500;
+    cursor:pointer;
+    text-decoration:none;
 }

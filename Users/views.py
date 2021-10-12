@@ -1,12 +1,16 @@
 from django.shortcuts import redirect, render
-from .models import User
-from .forms import UserRegisterForm,UserLoginForm,UserEditForm,UserFgPwdEmailAcceptForm,UserResetPwdForm
+from .models import User,Product,Order
+from .forms import (UserRegisterForm,
+                    UserLoginForm,
+                    UserEditForm,
+                    UserFgPwdEmailAcceptForm,
+                    UserResetPwdForm,
+                    )
 import re,hashlib
 
 # Create your views here.
 
 def Index_View(request):
-    
     return render(request,"index.html")
 
 def pwd_encode(pwd):
@@ -235,3 +239,41 @@ def User_Reset_Pwd_View(request):
             'form': userForm
         }
         return render(request,'resetpwd.html',context)
+
+def Fruits_View(request):
+    if 'add_to_cate' in request.POST:
+        userdata = User.objects.get(name=request.session['username'])
+        productdata = Product.objects.get(name=request.POST.get("fruit_name"))
+        qty = request.POST.get("quantity")
+        cost = float(productdata.price) * float(qty)
+
+        new_entry = Order(user=userdata, product=productdata, quantity=qty, cost=cost, status=False)
+        new_entry.save()
+        
+    elif 'add_to_wishlist' in request.POST:
+
+        return render(request,'user_profile.html')
+    fruit_obj = Product.objects.filter(categories='Fruit')
+    context = {
+        'fruit_obj' : fruit_obj
+    }
+    return render(request,'fruits.html',context)
+
+def Vegetables_View(request):
+    if 'add_to_cate' in request.POST:
+        userdata = User.objects.get(name=request.session['username'])
+        productdata = Product.objects.get(name=request.POST.get("vegetable_name"))
+        qty = request.POST.get("quantity")
+        cost = float(productdata.price) * float(qty)
+
+        new_entry = Order(user=userdata, product=productdata, quantity=qty, cost=cost, status=False)
+        new_entry.save()
+        
+    elif 'add_to_wishlist' in request.POST:
+
+        return render(request,'user_profile.html')
+    vegetable_obj = Product.objects.filter(categories='Vegetable')
+    context = {
+        'vegetable_obj' : vegetable_obj
+    }
+    return render(request,'Vegetables.html',context)

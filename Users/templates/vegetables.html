@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<center style="padding-top: 10px; font-weight: bold;"><h2>Vegetables</h2></center>
+<div class="row">
+    {% for vegetable in vegetable_obj %}
+        <div class="col-md-1"></div>
+        <div class="col-md-3" style="padding-top: 20px;">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <img style="width: 30%;
+                            margin-top: 20px;
+                            border: 1px #081500 solid;
+                            border-radius: 10px;"
+                    src='{{ MEDIA_URL | slice:":1" }}{{vegetable.image}}'>
+                <p style="padding-top: 10px;">{{ vegetable.name }}</p>
+                <p>Price: ${{ vegetable.price }} per 1kg</p>
+                <p>Description: {{ vegetable.description }}</p>
+                <div style="padding-bottom: 10px;">
+                    Quantity: <input type="number" name="quantity">
+                </div>
+                <input type="hidden" name="vegetable_name" value="{{ vegetable.name }}">
+                <input type="submit" name="add_to_cate" value="Add To Cate">
+                <input type="submit" name="add_to_wishlist" value="Add To Wishlist">
+            </form>
+        </div>
+    {% endfor %}
+</div>
+
+{{welcome}} 
+{% endblock %}

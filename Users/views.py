@@ -10,14 +10,25 @@ import re,hashlib
 
 # Create your views here.
 
-def Index_View(request):
-    return render(request,"index.html")
+def Shopping_cart(request,user_id):
+    product_img_qty_data = {}
+    total_cost = 0.0
+    if Order.objects.filter(user=user_id):
+        data = Order.objects.filter(user=user_id,status=False)
+        for one_obj in data:
+            product_img_qty_data[str(one_obj.product.image)] = [one_obj.quantity,one_obj.id]
+            total_cost += float(one_obj.quantity)
+    request.session['product_img_qty_data']=product_img_qty_data
+    request.session['total_cost']=total_cost
 
 def pwd_encode(pwd):
     # to imporve security by using md5 algorithm.
     md5_pwd =hashlib.md5(pwd.encode()).hexdigest()
     secure_pwd = hashlib.sha256(md5_pwd.encode()).hexdigest()
     return secure_pwd
+
+def Index_View(request):
+    return render(request,"index.html")
 
 def User_Register_View(request):
     if request.method == 'POST':
@@ -93,6 +104,9 @@ def User_Login_View(request):
                 request.session['id'] = user_data.id
                 request.session['email'] = user_data.email
                 request.session['password'] = user_data.password
+
+                Shopping_cart(request,request.session['id'])
+
                 return redirect('users:index')
             else:
                 userForm = UserLoginForm()
@@ -123,7 +137,11 @@ def User_Logout(request):
     del request.session['id']
     del request.session['email']
     del request.session['password']
-    
+    if 'product_img_qty_data' in request.session:
+        del request.session['product_img_qty_data']
+        del request.session['total_cost']
+    else:
+        return redirect('users:index')
     return redirect('users:index')
 
 def User_Profile(request,id):
@@ -241,7 +259,7 @@ def User_Reset_Pwd_View(request):
         return render(request,'resetpwd.html',context)
 
 def Fruits_View(request):
-    if 'add_to_cate' in request.POST:
+    if 'add_to_cart' in request.POST:
         userdata = User.objects.get(name=request.session['username'])
         productdata = Product.objects.get(name=request.POST.get("fruit_name"))
         qty = request.POST.get("quantity")
@@ -249,6 +267,8 @@ def Fruits_View(request):
 
         new_entry = Order(user=userdata, product=productdata, quantity=qty, cost=cost, status=False)
         new_entry.save()
+        
+        Shopping_cart(request,request.session['id'])
         
     elif 'add_to_wishlist' in request.POST:
 
@@ -260,7 +280,7 @@ def Fruits_View(request):
     return render(request,'fruits.html',context)
 
 def Vegetables_View(request):
-    if 'add_to_cate' in request.POST:
+    if 'add_to_cart' in request.POST:
         userdata = User.objects.get(name=request.session['username'])
         productdata = Product.objects.get(name=request.POST.get("vegetable_name"))
         qty = request.POST.get("quantity")
@@ -268,6 +288,8 @@ def Vegetables_View(request):
 
         new_entry = Order(user=userdata, product=productdata, quantity=qty, cost=cost, status=False)
         new_entry.save()
+
+        Shopping_cart(request,request.session['id'])
         
     elif 'add_to_wishlist' in request.POST:
 
@@ -277,3 +299,11 @@ def Vegetables_View(request):
         'vegetable_obj' : vegetable_obj
     }
     return render(request,'Vegetables.html',context)
+
+def Cart_Item_Delete(request):
+    if request.method == 'POST':
+        order_id = request.POST.get("order_id")
+        obj = Order.objects.get(id=order_id)
+        obj.delete()
+        Shopping_cart(request,request.session['id'])
+        return redirect(request.META.get('HTTP_REFERER'))

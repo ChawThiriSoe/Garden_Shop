@@ -5,6 +5,7 @@
     <div class="col-md-3">
         <a href="/user/index"><img id="logo" src="{% static 'images/logo.png' %}"></a>
     </div>
+
     <div class="col-md-1"></div>
     <div class="col-md-4">
         <center>
@@ -14,36 +15,90 @@
             </form>
         </center>
     </div>
+
 </div>
 
 <div class="row" >
+
+   
        <nav id="main-nav" >
             <ul>
                 <li><a href ="/user/index">Home</a></li>
                 <li class="categories">
                     Categories
                     <div class="itemlist">
-                        <a class="items" href="/user/fruits/">Fruits</a>
+                        <a class="items" href="/user/fruits">Fruits</a>
                         <a class="items" href="/user/vegetables">Vegetables</a>
                     </div>
+                    
                 </li>
                 <li><a href ="/user/index">Something</a></li>
                 <li><a href ="/user/index">Events</a></li>
                 <li><a href ="/user/index">Wish List</a></li>
+
                 {% if request.session.logged == True %}
-                <li><a href = "#"><i class="fa fa-shopping-cart" style="font-size:36px"></i></a></li>
+                
+                <li>
+                    <a>
+                        <i class="fa fa-shopping-cart cart" style="font-size:36px">
+                                <center>
+                                <div class="cartlist">
+                                    {% if request.session.product_img_data %}
+                                        <h4>Total Cost: {{request.session.total_cost}}</h4>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p class="cart_title">Image</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="cart_title">Qty</p>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+                                        {% for key,value in request.session.product_img_qty_data.items %}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img class="cart_img" src="{{ MEDIA_URL | slice:':1' }}{{key}}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="cart_qty">{{value.0}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <form action="/user/delete/" method='POST'>{% csrf_token %}
+                                                    <input type="hidden" name="order_id" value="{{value.1}}">
+                                                    <input type="submit" value="Delete" class="btn cart_item_del">
+                                                </form>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </center>
+                            
+                        </i>
+                    </a></li>
+                    
+                
                     <li class="profile">
                         <img id="nav-profile-image" src='{{ MEDIA_URL | slice:":1" }}{{request.session.image}}'>
+                            
+                        
                         <div class="itemlist">
                             <a class="items" href="/user/{{request.session.id}}/profile">Profile</a>
-                            <a class="items" href ="/user/logout">Logout</a>
+                            <a class="items" href ="/user/logout" onclick="return logOut()">Logout</a>
                         </div>
                     </li>
+                    
+
                 {% else %}
+
                     <li><a href ="/user/register">Signup</a></li>
                     <li><a href ="/user/login">Login</a></li>
 
                 {% endif %}
+                
             </ul>
         </nav>
+    
+    
+
 </div>

@@ -9,6 +9,7 @@ from .views import (
     User_Reset_Pwd_View,
     Fruits_View,
     Vegetables_View,
+    Cart_Item_Delete
     
     )
 from django.conf import settings
@@ -24,7 +25,8 @@ urlpatterns =[
     path('<int:id>/profile/',User_Profile,name='user-profile'),
     path('acceptemail/',User_FgPwd_Email_Accept_View,name='user-Fgpwd-EmailAccept'),
     path('resetpwd/',User_Reset_Pwd_View,name='user-reset-pwd'),
-    path('fruits/', Fruits_View, name='fruits'),
-    path('vegetables/', Vegetables_View, name='vegetables'),
+    path('fruits/', Fruits_View, name='fruit-view'),
+    path('vegetables/', Vegetables_View, name='vegetable-view'),
+    path('delete/',Cart_Item_Delete,name='cart-item-delete')
 
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

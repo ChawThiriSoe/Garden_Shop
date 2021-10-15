@@ -47,10 +47,30 @@ class UserFgPwdEmailAcceptForm(forms.ModelForm):
         ]
 
 class UserResetPwdForm(forms.ModelForm):
-    password = forms.CharField(label = 'Password',required = True, widget = forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password = forms.CharField(label = 'New Password',required = True, widget = forms.PasswordInput(attrs={'placeholder': 'New Password'}))
     
     class Meta:
         model = User
         fields = [
             'password'
+        ]
+
+class UserEditForm(forms.ModelForm):
+    name = forms.CharField(label = 'Name',required = True,widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    email = forms.EmailField(label = 'Email',required = True, widget=forms.TextInput(attrs={'placeholder': 'Enter your Email'}))
+
+    class Meta:
+        model = User
+        fields = [
+            'name',
+            'email'
+        ]
+
+class UserEditPasswordForm(forms.ModelForm):
+    password = forms.CharField(required = True, widget = forms.PasswordInput(attrs={'placeholder': 'New Password'}))
+
+    class Meta:
+        model = User
+        fields = [
+            'password',
         ]

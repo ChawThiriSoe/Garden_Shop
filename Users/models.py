@@ -6,7 +6,7 @@ from django.db.models.fields import CharField
 class User(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField(max_length=100)
-    password = models.CharField(max_length=15)
+    password = models.CharField(max_length=50)
     image= models.ImageField(upload_to='static/images/',null=True, default="static/images/default-image.png")
 
 class Product(models.Model):
@@ -21,9 +21,8 @@ class Product(models.Model):
     categories = models.CharField(max_length=100,choices=CATEGORIES)
 
 class Order(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
-    date = models.DateTimeField(auto_now_add=True, null=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     cost = models.DecimalField(decimal_places=2,max_digits=10000,default=0)
     status = models.BooleanField(default=False)

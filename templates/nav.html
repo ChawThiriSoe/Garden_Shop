@@ -43,7 +43,7 @@
                         <i class="fa fa-shopping-cart cart" style="font-size:36px">
                                 <center>
                                 <div class="cartlist">
-                                    {% if request.session.product_img_data %}
+                                    {% if request.session.product_img_qty_data %}
                                         <h4>Total Cost: {{request.session.total_cost}}</h4>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -83,7 +83,7 @@
                             
                         
                         <div class="itemlist">
-                            <a class="items" href="/user/{{request.session.id}}/profile">Profile</a>
+                            <a class="items" href="/user/profile">Profile</a>
                             <a class="items" href ="/user/logout" onclick="return logOut()">Logout</a>
                         </div>
                     </li>

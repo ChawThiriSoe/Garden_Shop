@@ -318,6 +318,19 @@ li a:hover{
     font-size:20px;
   }
 
+.item_btn {
+    background-color: #67BB12;
+    color: #081500;
+    border: none;
+    text-decoration: none;
+    height: 40px;
+}
+.item_btn:hover {
+    background-color: #F86166;
+    color: #081500;
+    text-decoration: none;
+}
+
 /* Style for footer */
 
 .footer {

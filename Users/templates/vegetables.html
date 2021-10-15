@@ -17,11 +17,27 @@
                 <p>Price: ${{ vegetable.price }} per 1kg</p>
                 <p>Description: {{ vegetable.description }}</p>
                 <div style="padding-bottom: 10px;">
-                    Quantity: <input type="number" name="quantity">
+                    Quantity: <input type="number" name="quantity" required>
                 </div>
                 <input type="hidden" name="vegetable_name" value="{{ vegetable.name }}">
-                <input type="submit" name="add_to_cart" value="Add To Cart">
-                <input type="submit" name="add_to_wishlist" value="Add To Wishlist">
+                
+                {% if request.session.logged == True %}
+                <input type="submit" name="add_to_cart" id="add_to_cart" hidden >
+                <label for="add_to_cart">
+                    <i class="fa fa-shopping-cart btn btn-default item_btn" style="float: left; margin-left: 67px; font-size:22px;"></i>
+                </label>
+                <input type="submit" name="add_to_wishlist" id="add_to_wishlist" hidden >
+                <label for="add_to_wishlist">
+                    <i class="fa fa-heart btn btn-default item_btn" style="float: left; margin-left: 67px; font-size:22px;"></i>
+                </label>
+                {% else %}
+                <a href="/user/login" class="btn btn-default item_btn" style="float: left; margin-left: 67px; font-size:22px;" onclick="return loginAlert()">
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+                <a href="/user/login" class= "btn btn-default item_btn" style="float: right; margin-right: 50px; font-size:22px;" onclick="return loginAlert()">
+                    <i class="fa fa-heart"></i>
+                </a>
+                {% endif %}
             </form>
         </div>
     {% endfor %}
